@@ -75,8 +75,7 @@ export class CartPage{
         //confirmation page
         await this.page.waitForURL('**/confirmation');
 
-        let heading = await this.page.getByRole('heading').innerText();
-        expect(heading).toBe("PAYMENT SUCCESS");
+       verifyHeading(this.page, "PAYMENT SUCCESS");
 
         let confirmationMessage = await this.page.locator("//p[@class='text-justify']").innerText();
         expect(confirmationMessage)
