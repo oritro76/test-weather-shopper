@@ -1,0 +1,6 @@
+version: "3"
+services:
+  playwright-test:
+    build: .
+    ports:
+      - "9323:9323"
