@@ -37,7 +37,7 @@ export class CartPage{
                 orderedProduct["name"] = await checkoutItemTds[count].innerText();
             }else{
                 orderedProduct["price"] = returnNumbersFromText(await checkoutItemTds[count].innerText());
-                checkoutPageOrderedProducts.push((orderedProduct);
+                checkoutPageOrderedProducts.push(orderedProduct);
                 orderedProduct = {};
             }
             
