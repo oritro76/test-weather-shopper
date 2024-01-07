@@ -1,10 +1,11 @@
 # Automated tests for Weather Shopper
 
 **Tech Stack**
-Typescript, Playwright
+Typescript, Playwright, Docker
 
 ## Prerequisites
 1. Install Node.js from https://nodejs.org/en
+2. Install Docker from https://docs.docker.com/engine/install/
 
 ## Project Structure At A Glance
 ```
@@ -64,4 +65,5 @@ docker compose build
 docker compose up
 ```
 
-Also the tests can be run from the Github actions. Use the Manually Run Weather Shopper Tests.
+If any of the tests fails, user can see the HTML report from the browser by visiting http://localhost:9323/ 
+Also the tests can be run from the Github actions. Use the Manually Run Weather Shopper Tests Github action.
