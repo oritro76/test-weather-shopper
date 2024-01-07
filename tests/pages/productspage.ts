@@ -11,7 +11,7 @@ export class ProductsPage{
         this.cartButton = this.page.getByRole('button').filter({ hasText: 'Cart' });
     }
 
-    public async getAllTheProducts(){
+    async getAllTheProducts(){
         let products: Product[] = [];
         let productsCardLocators = await this.page
                                             .locator("xpath=(//div[@class='text-center col-4'])")
@@ -29,13 +29,13 @@ export class ProductsPage{
         return products;
     }
 
-    public filterProductsBasedOnName(products:Product[], name:string){
+    filterProductsBasedOnName(products:Product[], name:string){
         return products.filter(product => product.name.toLowerCase()
                                                      .includes(name));
         
     }
 
-    public getLowestOrHighestPricedProduct(products:Product[], priceType:string="lowest"){
+    getLowestOrHighestPricedProduct(products:Product[], priceType:string="lowest"){
         if(priceType === "lowest"){
             return products.reduce((minPriceProduct:Product, currentProduct:Product) => {
                 return Number(currentProduct.price) < Number(minPriceProduct.price) ? currentProduct : minPriceProduct;
@@ -47,12 +47,12 @@ export class ProductsPage{
         }
     }
 
-    public async verifyNumberOfProductsShowedInCartButton(products:Product[]){
+    async verifyNumberOfProductsShowedInCartButton(products:Product[]){
         let cartProductCount = returnNumbersFromText(await this.cartButton.innerText());
         expect(cartProductCount).toBe(products.length);
     }
 
-    public async addProductsToCart(productsToOrder){
+    async addProductsToCart(productsToOrder:Product[]){
         let products = await this.getAllTheProducts();
         let productsAddedToCart = [];
         for(let product of productsToOrder){
@@ -67,7 +67,7 @@ export class ProductsPage{
 
     }
 
-    public async clickOnCartButton(){
+    async clickOnCartButton(){
         await this.cartButton.click();
         await this.page.waitForURL('**/cart');
         await verifyHeading(this.page, "Checkout");
