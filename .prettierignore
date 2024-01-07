@@ -1,0 +1,10 @@
+node_modules
+playwright-report
+test-results
+.gitignore
+package-lock.json
+package.json
+compose.yaml
+Dockerfile
+tsconfig.json
+.prettierrc.json
