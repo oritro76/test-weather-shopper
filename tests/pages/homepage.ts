@@ -1,7 +1,7 @@
 import { type Locator, type Page } from '@playwright/test';
 import {verifyHeading, returnNumbersFromText} from '../utilities/functions';
 
-export class Homepage {
+export class HomePage {
     readonly page: Page;
     readonly temperatureText: Locator;
     readonly buyMoisturizersButton: Locator;
@@ -9,38 +9,40 @@ export class Homepage {
 
     constructor(page: Page) {
         this.page = page;
-        this.temperatureText = page.locator("css=#temperature");
-        this.buyMoisturizersButton = page.getByRole('button', { name: 'Buy moisturizers' });
-        this.buySunscreenButton = page.getByRole('button', { name: 'Buy sunscreens' });
+        this.temperatureText = this.page.locator("css=#temperature");
+        this.buyMoisturizersButton = this.page.getByRole('button', { name: 'Buy moisturizers' });
+        this.buySunscreenButton = this.page.getByRole('button', { name: 'Buy sunscreens' });
     }
 
-    public async goTo(){
+    async goTo(){
         this.page.goto("/");
     }
 
-    public async getTempeture(){
+    async getTempeture(){
         let temperature = await this.temperatureText.innerText();
         return returnNumbersFromText(temperature);
     }
 
-    public async goToSuncscreenPage(){
+    async goToSuncscreenPage(){
         await this.buySunscreenButton.click();
         await this.page.waitForURL('**/sunscreen');
         await verifyHeading(this.page,"Sunscreens");
     }
 
-    public async goToMoisturizersPage(){
+    async goToMoisturizersPage(){
         await this.buyMoisturizersButton.click();
         await this.page.waitForURL('**/moisturizer');
         await verifyHeading(this.page,"Moisturizers");
     }
 
-    public async chooseSunscreenOrMoisturizers(){
+    async chooseSunscreenOrMoisturizers(){
         let temperature = await this.getTempeture();
         if(temperature < 19){
-            this.goToMoisturizersPage();
+            await this.goToMoisturizersPage();
+            return "moisturizer";
         }else if(temperature > 34){
-            this.goToSuncscreenPage();
+            await this.goToSuncscreenPage();
+            return "sunscreen";
         }
 
     }
