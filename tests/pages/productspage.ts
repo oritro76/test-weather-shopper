@@ -16,7 +16,6 @@ export class ProductsPage {
     let productsCardLocators = await this.page
       .locator("xpath=(//div[@class='text-center col-4'])")
       .all();
-    console.log(productsCardLocators);
     for (let productsCard of productsCardLocators) {
       let product: Product = {
         name: await productsCard.locator("xpath=/p[1]").innerText(),

@@ -35,7 +35,6 @@ test("pay with stripe", async ({ page }) => {
   const productsToAddToCart = productsToOrder[productType];
   const productsAddedToCart =
     await productsPage.addProductsToCart(productsToAddToCart);
-  console.log(productsAddedToCart);
   await productsPage.verifyNumberOfProductsShowedInCartButton(
     productsAddedToCart,
   );
