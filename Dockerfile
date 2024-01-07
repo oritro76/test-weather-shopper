@@ -1,6 +1,3 @@
-# Get the base image of Node version
-FROM node:20-alpine3.18
-
 # Get the latest version of Playwright
 FROM mcr.microsoft.com/playwright:v1.40.0-jammy
  
